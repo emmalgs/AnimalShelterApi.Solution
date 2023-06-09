@@ -82,6 +82,21 @@ namespace AnimalShelterApi.Controllers
       return NoContent();
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+      User user = await _db.Users.FindAsync(id);
+      if (user ==  null)
+      {
+        return NotFound();
+      }
+
+      _db.Users.Remove(user);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
+
     private bool UserExists(int id)
     {
       return _db.Users.Any(e => e.UserId == id);
