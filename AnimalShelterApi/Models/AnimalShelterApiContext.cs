@@ -1,13 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace AnimalShelterApi.Models
 {
-  public class AnimalShelterApiContext : IdentityDbContext<User>
+  public class AnimalShelterApiContext : DbContext
   {
     public DbSet<Animal> Animals { get; set; }
     public DbSet<SavedAnimal> SavedAnimals { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public AnimalShelterApiContext(DbContextOptions options) : base(options)
     {
@@ -24,12 +23,6 @@ namespace AnimalShelterApi.Models
           new Animal { AnimalId = 5, Name = "Borgus", Type = "Cat", Breed="Tabby/Stinky", Available=true, DateAdmitted = new DateTime(2022, 6, 2)}
 
         );
-
-        base.OnModelCreating(builder);
-        builder.Entity<IdentityUserLogin<string>>(entity =>
-        {
-            entity.HasKey(x => x.UserId);
-        });
     }
   }
 }

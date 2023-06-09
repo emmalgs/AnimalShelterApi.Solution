@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,11 +19,7 @@ builder.Services.AddDbContext<AnimalShelterApiContext>(
                     )
                   )
                 );
-
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<AnimalShelterApiContext>()
-    .AddDefaultTokenProviders();
-
+                
 builder.Services.AddAuthentication();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
