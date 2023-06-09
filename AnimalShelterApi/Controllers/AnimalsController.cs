@@ -7,6 +7,7 @@ namespace AnimalShelterApi.Controllers
   [Route("api/v{version:apiVersion}/[controller]")]
   [ApiController]
   [ApiVersion("1.0")]
+  [ApiVersion("1.1")]
 
   public class AnimalsController: ControllerBase
   {
@@ -46,6 +47,7 @@ namespace AnimalShelterApi.Controllers
       return await query.ToListAsync();
     }
 
+    [MapToApiVersion("1.1")]
     [HttpGet("{id}")]
     public async Task<ActionResult<Animal>> GetAnimal(int id)
     {
