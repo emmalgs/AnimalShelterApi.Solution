@@ -23,9 +23,9 @@ namespace AnimalShelterApi.Models
         );
       builder.Entity<User>()
         .HasData(
-          new User { UserId=1, Username="gogorobinson", EmailAddress = "gogo@rob.com", Password = "eggs", GivenName = "Gogo", Surname = "Robinson", Role = "Adminstrator"},
-          new User { UserId = 2, Username="stever", EmailAddress = "stever@rob.com", Password = "eggs2", GivenName = "Stever", Surname = "Scorpion", Role = "Standard"},
-          new User { UserId = 3, Username="dread", EmailAddress = "dread@rob.com", Password = "eggs3", GivenName = "Dread", Surname = "Veil", Role = "Standard"}
+          new User { UserId=1, Username="gogorobinson", Password = "eggs", Role = "Adminstrator"},
+          new User { UserId = 2, Username="stever", Password = "eggs2", Role = "Standard"},
+          new User { UserId = 3, Username="dread", Password = "eggs3", Role = "Standard"}
         );
     }
   }
