@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace AnimalShelterApi.Startup;
 
