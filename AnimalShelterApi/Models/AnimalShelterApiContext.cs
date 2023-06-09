@@ -17,11 +17,11 @@ namespace AnimalShelterApi.Models
     {
       builder.Entity<Animal>()
         .HasData(
-          new Animal { AnimalId = 1, Name = "Scratchy", Type = "Cat", Breed="Scruffy", Available=true, DateAdmitted = "2018-02-01" },
-          new Animal { AnimalId = 2, Name = "Cranko", Type = "Dog", Breed="Beagle/Sneaky", Available=true, DateAdmitted = "2022-03-12" },
-          new Animal { AnimalId = 3, Name = "Sporty", Type = "Bird", Breed="Feathered", Available=false, DateAdmitted = "2022-07-28" },
-          new Animal { AnimalId = 4, Name = "Stanley", Type = "Dog", Breed="Foxhound", Available=true, DateAdmitted = "2021-01-18" },
-          new Animal { AnimalId = 5, Name = "Borgus", Type = "Cat", Breed="Tabby/Stinky", Available=true, DateAdmitted = "2022-09-22" }
+          new Animal { AnimalId = 1, Name = "Scratchy", Type = "Cat", Breed="Scruffy", Available=true, DateAdmitted = new DateTime(2018, 3, 1)},
+          new Animal { AnimalId = 2, Name = "Cranko", Type = "Dog", Breed="Beagle/Sneaky", Available=true, DateAdmitted = new DateTime(2022, 5, 11)},
+          new Animal { AnimalId = 3, Name = "Sporty", Type = "Bird", Breed="Feathered", Available=false, DateAdmitted = new DateTime(2020, 12, 31)},
+          new Animal { AnimalId = 4, Name = "Stanley", Type = "Dog", Breed="Foxhound", Available=true, DateAdmitted = new DateTime(2022, 4, 23)},
+          new Animal { AnimalId = 5, Name = "Borgus", Type = "Cat", Breed="Tabby/Stinky", Available=true, DateAdmitted = new DateTime(2022, 6, 2)}
 
         );
 
