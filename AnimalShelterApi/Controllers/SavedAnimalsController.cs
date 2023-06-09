@@ -85,5 +85,39 @@ namespace AnimalShelterApi.Controllers
 
       return entry;
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, SavedAnimal entry)
+    {
+      if (entry.SavedAnimalId != id)
+      {
+        return BadRequest();
+      }
+
+      _db.SavedAnimals.Update(entry);
+
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!SavedAnimalExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+
+      return NoContent();
+    }
+
+    private bool SavedAnimalExists(int id)
+    {
+      return _db.SavedAnimals.Any(e => e.SavedAnimalId == id);
+    }
   }
 }
