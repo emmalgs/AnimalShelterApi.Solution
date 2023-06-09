@@ -2,6 +2,15 @@
 
 ### By Emma Gerigscott
 
+## Table of Contents
+1. [Project Description](#description)
+2. [Technologies Used](#technologies-used)
+3. [Database Setup Instructions](#database-setup-instructions)
+4. [Using This API](#using-this-api)
+5. [How To Query This API](#query-parameters-for-a-get-request-on-animals)
+6. [Bugs](#known-bugs)
+7. [License](#mit-license)
+
 ## Description
 
 An API to search, add, edit, and delete the animals at Bingo's Lonely Animal House. This API generates a JWT Token: edit, add, and delete methods are only authorized for "Admin" role.
@@ -47,7 +56,6 @@ An API to search, add, edit, and delete the animals at Bingo's Lonely Animal Hou
 ## Using This API
 * Endpoints for **v1.0** API are as follows:
 ```
-
 GET https://localhost:5001/api/v1/animals/
 POST https://localhost:5001/api/v1/animals/
 PUT https://localhost:5001/api/v1/animals/{id}
@@ -56,14 +64,21 @@ DELETE https://localhost:5001/api/v1/animals/{id}
 
 * Additional endpoints for **v1.1**:
 ```
-GET https://localhost:5001/api/v1/animals/{id}
+GET https://localhost:5001/api/v1.1/animals/{id}
+PATCH https://localhost:5001/api/v1.1/animals/{id}
 ```
-
+  * To use the PATCH, use the following sample JSON syntax:
+  ```
+  [
+    { "op": "replace", "path": "/Available", "value": false }
+  ]
+  ```
+  * "op" is the operation, "path" is the table column name, and "value" is the new value.
 * In your terminal run ```dotnet watch run``` in the project directory.
 * In your browser open https://localhost:5001/swagger/index.html
 * Use the GUI to navigate the API
 
-* Query Parameters for a GET Request on **Animals**: 
+## Query Parameters for a GET Request on **Animals**: 
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
