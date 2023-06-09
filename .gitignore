@@ -3,3 +3,4 @@ obj
 .DS_store
 .vscode
 appsettings.json
+appsettings.Developement.json
