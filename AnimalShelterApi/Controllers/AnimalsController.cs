@@ -61,7 +61,7 @@ namespace AnimalShelterApi.Controllers
       return animal;
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<Animal>> Post(Animal animal)
     {
@@ -71,7 +71,7 @@ namespace AnimalShelterApi.Controllers
     }
 
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Animal animal)
     {
@@ -99,7 +99,7 @@ namespace AnimalShelterApi.Controllers
       return NoContent();
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnimal(int id)
     {
