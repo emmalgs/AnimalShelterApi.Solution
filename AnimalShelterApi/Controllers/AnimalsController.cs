@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AnimalShelterApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelterApi.Controllers
 {
@@ -66,6 +67,43 @@ namespace AnimalShelterApi.Controllers
 
       return animal;
     }
+
+    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Admin")]
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(int id, JsonPatchDocument<Animal> patch)
+    {
+      Animal thisAnimal = await _db.Animals.FindAsync(id);
+      if (thisAnimal == null)
+      {
+        return NotFound();
+      }
+      patch.ApplyTo(thisAnimal, ModelState);
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      _db.Animals.Update(thisAnimal);
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!AnimalExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+      return NoContent();
+    }
+
 
     [Authorize(Roles = "Admin")]
     [HttpPost]

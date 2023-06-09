@@ -11,7 +11,9 @@ public static class DependencyInjectionSetup
   {
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
-    services.AddControllers();
+
+    services.AddControllers().AddNewtonsoftJson();
+
     services.AddAuthentication(options =>
                             {
                               options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
