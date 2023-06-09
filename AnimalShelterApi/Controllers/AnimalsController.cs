@@ -18,7 +18,7 @@ namespace AnimalShelterApi.Controllers
     }
 
     [HttpGet]
-    public async Task<List<Animal>> Get(string name, string type, string breed, DateTime? date = null, bool? available = null)
+    public async Task<List<Animal>> Get(string name, string type, string breed, DateTime? date = null, bool? available = null, bool random = false)
     {
       IQueryable<Animal> query = _db.Animals
                                     .AsQueryable();
@@ -42,6 +42,12 @@ namespace AnimalShelterApi.Controllers
       if (available.HasValue)
       {
         query = query.Where(entry => entry.Available == available);
+      }
+      if (random)
+      {
+        Random randomInt = new Random();
+        int id = randomInt.Next(1, _db.Animals.ToList().Count);
+        query = query.Where(a => a.AnimalId == id);
       }
 
       return await query.ToListAsync();
