@@ -49,7 +49,6 @@ An API to search, add, edit, and delete the animals at Bingo's Lonely Animal Hou
 ```
 
 GET https://localhost:5001/api/v1/animals/
-
 POST https://localhost:5001/api/v1/animals/
 PUT https://localhost:5001/api/v1/animals/{id}
 DELETE https://localhost:5001/api/v1/animals/{id}
