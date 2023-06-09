@@ -9,7 +9,6 @@ namespace AnimalShelterApi.Controllers
   [ApiController]
   [ApiVersion("1.0")]
   [ApiVersion("1.1")]
-  [Authorize]
   public class AnimalsController: ControllerBase
   {
     private readonly AnimalShelterApiContext _db;
@@ -62,6 +61,7 @@ namespace AnimalShelterApi.Controllers
       return animal;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<Animal>> Post(Animal animal)
     {
@@ -70,6 +70,8 @@ namespace AnimalShelterApi.Controllers
       return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }
 
+
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Animal animal)
     {
@@ -97,6 +99,7 @@ namespace AnimalShelterApi.Controllers
       return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnimal(int id)
     {

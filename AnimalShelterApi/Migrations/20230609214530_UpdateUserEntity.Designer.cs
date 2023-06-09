@@ -3,6 +3,7 @@ using System;
 using AnimalShelterApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimaShelterApi.Migrations
 {
     [DbContext(typeof(AnimalShelterApiContext))]
-    partial class AnimalShelterApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230609214530_UpdateUserEntity")]
+    partial class UpdateUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,6 +91,49 @@ namespace AnimaShelterApi.Migrations
                             DateAdmitted = new DateTime(2022, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Borgus",
                             Type = "Cat"
+                        });
+                });
+
+            modelBuilder.Entity("AnimalShelterApi.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Password = "eggs",
+                            Role = "Adminstrator",
+                            Username = "gogorobinson"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Password = "eggs2",
+                            Role = "Standard",
+                            Username = "stever"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Password = "eggs3",
+                            Role = "Standard",
+                            Username = "dread"
                         });
                 });
 #pragma warning restore 612, 618
