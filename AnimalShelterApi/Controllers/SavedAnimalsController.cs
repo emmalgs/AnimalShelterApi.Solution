@@ -45,7 +45,33 @@ namespace AnimalShelterApi.Controllers
 
         return NoContent();
       }
+    }
 
+    [HttpGet]
+    public async Task<List<SavedAnimal>> GetSavedAnimals(int animalId, int userId, string animalName, string userName)
+    {
+      IQueryable<SavedAnimal> query = _db.SavedAnimals.AsQueryable();
+
+      if (animalId > 0)
+      {
+        query = query.Where(e => e.AnimalId == animalId);
+      }
+      if (userId > 0)
+      {
+        query = query.Where(e => e.UserId == userId);
+      }
+      if (animalName != null)
+      {
+        Animal thisAnimal = await _db.Animals.FirstOrDefaultAsync(a => a.Name == animalName);
+        query = query.Where(e => e.AnimalId == thisAnimal.AnimalId);
+      }
+      if (userName != null)
+      {
+        User thisUser = await _db.Users.FirstOrDefaultAsync(a => a.Username == userName);
+        query = query.Where(e => e.UserId == thisUser.UserId);
+      }
+
+      return await query.ToListAsync();
     }
   }
 }
