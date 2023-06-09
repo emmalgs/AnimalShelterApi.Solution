@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<TravelApiContext>(
+builder.Services.AddDbContext<AnimalShelterApiContext>(
                   dbContextOptions => dbContextOptions
                     .UseMySql(
                       builder.Configuration["ConnectionStrings:DefaultConnection"],
@@ -22,7 +22,7 @@ builder.Services.AddDbContext<TravelApiContext>(
                 );
 
 builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<TravelApiContext>()
+    .AddEntityFrameworkStores<AnimalShelterApiContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication();
@@ -91,7 +91,6 @@ public class ConfigureSwaggerOptions
     }
     public void Configure(SwaggerGenOptions options)
     {
-        // add swagger document for every API version discovered
         foreach (var description in _provider.ApiVersionDescriptions)
         {
             options.SwaggerDoc(
