@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace AnimalShelterApi.Startup;
 
@@ -9,7 +12,26 @@ public static class DependencyInjectionSetup
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
     services.AddControllers();
-    services.AddAuthentication();
+    services.AddAuthentication(options =>
+                            {
+                              options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                              options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                              options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                            })
+                            .AddJwtBearer(options =>
+                            {
+                              options.SaveToken = true;
+                              options.RequireHttpsMetadata = false;
+                              options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                              {
+                                ValidateIssuer = true,
+                                ValidateAudience = true,
+                                ValidAudience = "https://localhost:5001",
+                                ValidIssuer = "https://localhost:5001",
+                                ClockSkew = TimeSpan.Zero,
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("CrankItToHeckinHeck"))
+                              };
+                            });
 
     services.AddApiVersioning(opt =>
                                     {

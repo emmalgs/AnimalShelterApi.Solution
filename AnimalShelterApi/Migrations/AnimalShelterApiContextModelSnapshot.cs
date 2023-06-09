@@ -92,32 +92,26 @@ namespace AnimaShelterApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AnimalShelterApi.Models.SavedAnimal", b =>
-                {
-                    b.Property<int>("SavedAnimalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AnimalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SavedAnimalId");
-
-                    b.HasIndex("AnimalId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SavedAnimals");
-                });
-
             modelBuilder.Entity("AnimalShelterApi.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("GivenName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Username")
                         .HasColumnType("longtext");
@@ -125,31 +119,38 @@ namespace AnimaShelterApi.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
 
-            modelBuilder.Entity("AnimalShelterApi.Models.SavedAnimal", b =>
-                {
-                    b.HasOne("AnimalShelterApi.Models.Animal", null)
-                        .WithMany("SavedAnimals")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AnimalShelterApi.Models.User", null)
-                        .WithMany("SavedAnimals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimalShelterApi.Models.Animal", b =>
-                {
-                    b.Navigation("SavedAnimals");
-                });
-
-            modelBuilder.Entity("AnimalShelterApi.Models.User", b =>
-                {
-                    b.Navigation("SavedAnimals");
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            EmailAddress = "gogo@rob.com",
+                            GivenName = "Gogo",
+                            Password = "eggs",
+                            Role = "Adminstrator",
+                            Surname = "Robinson",
+                            Username = "gogorobinson"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            EmailAddress = "stever@rob.com",
+                            GivenName = "Stever",
+                            Password = "eggs2",
+                            Role = "Standard",
+                            Surname = "Scorpion",
+                            Username = "stever"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            EmailAddress = "dread@rob.com",
+                            GivenName = "Dread",
+                            Password = "eggs3",
+                            Role = "Standard",
+                            Surname = "Veil",
+                            Username = "dread"
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,5 @@ namespace AnimalShelterApi.Models
     public string Breed { get; set; }
     public bool Available { get; set; }
     public DateTime DateAdmitted { get; set; }
-    public List<SavedAnimal> SavedAnimals { get; set; }
   }
 }

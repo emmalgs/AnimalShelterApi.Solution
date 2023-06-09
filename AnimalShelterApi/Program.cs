@@ -20,6 +20,9 @@ var app = builder.Build();
 app.ConfigureSwagger();
 
 app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseAuthentication(); 
 app.UseAuthorization();
 

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimalShelterApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimalShelterApi.Controllers
 {
@@ -8,7 +9,7 @@ namespace AnimalShelterApi.Controllers
   [ApiController]
   [ApiVersion("1.0")]
   [ApiVersion("1.1")]
-
+  [Authorize]
   public class AnimalsController: ControllerBase
   {
     private readonly AnimalShelterApiContext _db;

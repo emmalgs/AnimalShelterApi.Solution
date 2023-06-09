@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AnimaShelterApi.Migrations
 {
-    public partial class InitialDbWithoutEFCoreIdentity : Migration
+    public partial class InitialJWTTokenUserVersion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,38 +41,21 @@ namespace AnimaShelterApi.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EmailAddress = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Password = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GivenName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Surname = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Role = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "SavedAnimals",
-                columns: table => new
-                {
-                    SavedAnimalId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    AnimalId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SavedAnimals", x => x.SavedAnimalId);
-                    table.ForeignKey(
-                        name: "FK_SavedAnimals_Animals_AnimalId",
-                        column: x => x.AnimalId,
-                        principalTable: "Animals",
-                        principalColumn: "AnimalId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SavedAnimals_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -88,22 +71,19 @@ namespace AnimaShelterApi.Migrations
                     { 5, true, "Tabby/Stinky", new DateTime(2022, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borgus", "Cat" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_SavedAnimals_AnimalId",
-                table: "SavedAnimals",
-                column: "AnimalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SavedAnimals_UserId",
-                table: "SavedAnimals",
-                column: "UserId");
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "EmailAddress", "GivenName", "Password", "Role", "Surname", "Username" },
+                values: new object[,]
+                {
+                    { 1, "gogo@rob.com", "Gogo", "eggs", "Adminstrator", "Robinson", "gogorobinson" },
+                    { 2, "stever@rob.com", "Stever", "eggs2", "Standard", "Scorpion", "stever" },
+                    { 3, "dread@rob.com", "Dread", "eggs3", "Standard", "Veil", "dread" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "SavedAnimals");
-
             migrationBuilder.DropTable(
                 name: "Animals");
 
