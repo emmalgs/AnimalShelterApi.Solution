@@ -1,0 +1,19 @@
+@{ ViewBag.Title = "All Animals In The House";}
+
+<h2>All Animals</h2>
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead><tr><th>Name</th><th>Type</th><th>Breed</th></tr></thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Name</td>
+                    <td>@r.Type</td>
+                    <td>@r.Breed</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
