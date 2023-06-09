@@ -31,6 +31,26 @@ namespace AnimalShelterApi.Controllers
       return await query.ToListAsync();
     }
 
+  [HttpGet("{id}")]
+  public async Task<ActionResult<User>> GetUser(int id)
+  {
+    User user = await _db.Users
+                          .Include(u => u.SavedAnimals)
+                          .FirstOrDefaultAsync(u => u.UserId ==id);
 
+    if (user == null)
+    {
+      return NotFound();
+    }
+    return user;
+  }
+
+  [HttpPost]
+  public async Task<ActionResult<User>> Post(User user)
+  {
+    _db.Users.Add(user);
+    await _db.SaveChangesAsync();
+    return CreatedAtAction(nameof(GetUser), new { id = user.UserId}, user);
+  }
   }
 }
