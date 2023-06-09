@@ -1,28 +1,25 @@
-# Animal Shelter API
+# Bingo's Lonely Animal House API
 
 ### By Emma Gerigscott
 
 ## Description
 
-An API to search, add, edit, and delete the animals in the animal shelter. You can sign up as a user and save animals that you are interested in to your account!
+An API to search, add, edit, and delete the animals at Bingo's Lonely Animal House. This API generates a JWT Token: edit, add, and delete methods are only authorized for "Admin" role.
 
 ## Technologies Used
 
 * C#
 * .NET
 * ASP.NET Core
-* MVC
+  * Authentication
+  * Versioning
+* API
 * Entity Framework Core
 * Pomelo Entity Framework Core
-* EFCore Identity
 * EFCore Migrations
 * Swashbuckle
 * Swagger
 * MySQL
-
-## Database Structure
-
-![schema](/AnimalShelterApi/wwwroot/img/travelShema.png)
 
 ## Database Setup Instructions
 
@@ -51,89 +48,38 @@ An API to search, add, edit, and delete the animals in the animal shelter. You c
 * Endpoints for **v1.0** API are as follows:
 ```
 
-Countries:
-GET https://localhost:5001/api/v1/countries/
-GET https://localhost:5001/api/v1/countries/{id}
-POST https://localhost:5001/api/v1/countries/
-PUT https://localhost:5001/api/v1/countries/{id}
-DELETE https://localhost:5001/api/v1/countries/{id}
+GET https://localhost:5001/api/v1/animals/
 
-Reviews:
-GET https://localhost:5001/api/v1/reviews/
-POST https://localhost:5001/api/v1/reviews/
-GET https://localhost:5001/api/v1/reviews/{id}
-
-Users:
-GET https://localhost:5001/api/v1/users/
-POST https://localhost:5001/api/v1/users/
-GET https://localhost:5001/api/v1/users/{id}
-PUT https://localhost:5001/api/v1/users/{id}
-DELETE https:///localhost:5001/api/v1/users/{id}
-PUT https:///localhost:5001/api/v1/users/{userId}/reviews/{reviewId}
-DELETE https:///localhost:5001/api/v1/users/{userId}/reviews/{reviewId}
-
+POST https://localhost:5001/api/v1/animals/
+PUT https://localhost:5001/api/v1/animals/{id}
+DELETE https://localhost:5001/api/v1/animals/{id}
 ```
-* Endpoints for **v2.0** are:
-```
-Countries (same as v1.0)
-Reviews:
-GET https://localhost:5001/api/v2/reviews/
-GET https://localhost:5001/api/v2/reviews/{id}
 
-Users:
-GET https://localhost:5001/api/users/
-POST https://localhost:5001/api/users/
-GET https://localhost:5001/api/users/{id}
-PUT https://localhost:5001/api/users/{id}
-DELETE https:///localhost:5001/users/{id}
-POST https://localhost:5001/api/users/{userId}/reviews/
-PUT https:///localhost:5001/users/{userId}/reviews/{reviewId}
-DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
+* Additional endpoints for **v1.1**:
+```
+GET https://localhost:5001/api/v1/animals/{id}
 ```
 
 * In your terminal run ```dotnet watch run``` in the project directory.
 * In your browser open https://localhost:5001/swagger/index.html
 * Use the GUI to navigate the API
 
-* Query Parameters for a GET Request on **Countries**: 
+* Query Parameters for a GET Request on **Animals**: 
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
-| Countries | List | not required | Returns a list of all countries in database | https://localhost:5001/api/countries |
-| Name       | String | not required | Returns countries with a matching name value     | https://localhost:5001/api/countries?name={COUNTRYNAME} |
-| Language   | String | not required | Returns countries with a matching language value | https://localhost:5001/api/countries?language={LANGUAGE} |
-| Climate    | String | not required | Returns countries with a matching climate value  | https://localhost:5001/api/countries?climate={CLIMATE} |
-| Population | Int    | not required | Returns countries with a matching population value | https://localhost:5001/api/countries?population={NUMBER} |
-| SortBy | string | not required | Sorts by "popular" or "unpopular" | https://localhost:5001/api/countries?sortBy={popular/unpopular} |
-| Random | boolean | not required | Returns a random Country, Default is False | https://localhost:5001/api/countries?random={TRUE} |
-| Page Number + Page Size | int, int | not required | Returns countries with user selected page number & page size | https://localhost:5001/api/countries?pageNumber={PAGENUMBER}&pageSize={PAGESIZE} |
-
-* Query Parameters for a GET Request on **Reviews**: 
-
-| Parameter  | Type   | Required     | Description                                      | Sample Url  |
-|----------- |-----   | ---------    | -------------                                    | ----------  |
-| Reviews | List | not required | Returns a list of all reviews in database | https://localhost:5001/api/reviews |
-| Text       | String | not required | Returns reviews with matching text value     | https://localhost:5001/api/reviews?text={TEXTCONTENT} |
-| CountryId   | Int | not required | Returns reviews with a matching countryId value | https://localhost:5001/api/reviews?countryId={Number} |
-| Country Name    | String | not required | Returns reviews with matching country name  | https://localhost:5001/api/reviews?countryName={COUNTRYNAME} |
-| UserId | Int    | not required | Returns reviews with a matching userId | https://localhost:5001/api/reviews?userId={NUMBER} |
-| UserName | String    | not required | Returns reviews with a matching username | https://localhost:5001/api/reviews?userName={USERNAME} |
-| Random | boolean | not required | Returns a random Review, Default is False | https://localhost:5001/api/reviews?random={TRUE} |
-| Page Number + Page Size | int, int | not required | Returns reviews with user selected page number & page size | https://localhost:5001/api/reviews?pageNumber={PAGENUMBER}&pageSize={PAGESIZE} |
-
-* Query Parameters for a GET Request on **Users**:
-
-| Parameter  | Type   | Required     | Description                                      | Sample Url  |
-|----------- |-----   | ---------    | -------------                                    | ----------  |
-| Users | List | not required | Returns a list of all users in database | https://localhost:5001/api/users |
-| User Name | String | not required | Returns a user with matching user name  | https://localhost:5001/api/users?username={USERNAME} |
-| UserId | int | not required | Returns a user with matching userId | https://localhost:5001/api/users/{NUMBER} |
-
+| Animals | List | not required | Returns a list of all animals in database | https://localhost:5001/api/animals |
+| Name       | String | not required | Returns animals with a matching name value     | https://localhost:5001/api/animals?name={ANIMAL_NAME} |
+| Type   | String | not required | Returns animals with a matching type value (i.e. 'Dog' or 'Cat') | https://localhost:5001/api/animals?type={ANIMAL_TYPE} |
+| Breed    | String | not required | Returns animals with a matching breed value  | https://localhost:5001/api/animals?breed={BREED} |
+| Date | DateTime(YYYY-mm-DD)    | not required | Returns animals with a matching admittance date (note: must include Year, Month, and Day) | https://localhost:5001/api/animals?date={YYYY-mm-DD} |
+| Available | bool | not required | Returns list of animals that are available (true) or adopted (false) | https://localhost:5001/api/animals?available={true/false} |
+| Random | bool | not required | Returns a random animal, Default is False | https://localhost:5001/api/animals?random={TRUE} |
 
 
 ## Known Bugs
 
-
+* _Random query may return null animal as it counts the list of animals to retrieve random id number._
 
 ## [MIT](https://opensource.org/license/mit/) License 
 
