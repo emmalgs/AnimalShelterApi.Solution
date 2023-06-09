@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AnimalShelterApi.Models
 {
   public class Animal
