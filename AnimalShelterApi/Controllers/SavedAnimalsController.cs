@@ -73,5 +73,17 @@ namespace AnimalShelterApi.Controllers
 
       return await query.ToListAsync();
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<SavedAnimal>> GetSavedAnimal(int id)
+    {
+      SavedAnimal entry = await _db.SavedAnimals.FirstOrDefaultAsync(e => e.SavedAnimalId == id);
+      if (entry == null)
+      {
+        return NotFound($"post at id {id} not found");
+      }
+
+      return entry;
+    }
   }
 }
