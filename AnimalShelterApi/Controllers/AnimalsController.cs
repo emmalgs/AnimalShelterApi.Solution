@@ -69,7 +69,6 @@ namespace AnimalShelterApi.Controllers
     }
 
     [MapToApiVersion("1.1")]
-    [Authorize(Roles = "Admin")]
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(int id, JsonPatchDocument<Animal> patch)
     {
@@ -115,7 +114,6 @@ namespace AnimalShelterApi.Controllers
     }
 
 
-    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Animal animal)
     {
@@ -143,7 +141,6 @@ namespace AnimalShelterApi.Controllers
       return NoContent();
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnimal(int id)
     {
