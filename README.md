@@ -40,7 +40,7 @@ An API to search, add, edit, and delete the animals at Bingo's Lonely Animal Hou
   ```
   {
   "ConnectionStrings": {
-      "DefaultConnection": "Server=localhost;Port=3306;database=travel_api;uid=[YOUR_SQL_USER_ID];pwd=[YOUR_SQL_PASSWORD];"
+      "DefaultConnection": "Server=localhost;Port=3306;database=animalshelter_api;uid=[YOUR_SQL_USER_ID];pwd=[YOUR_SQL_PASSWORD];"
     }
   }
   ```
@@ -67,16 +67,51 @@ DELETE https://localhost:5001/api/v1/animals/{id}
 GET https://localhost:5001/api/v1.1/animals/{id}
 PATCH https://localhost:5001/api/v1.1/animals/{id}
 ```
-  * To use the PATCH, use the following sample JSON syntax:
-  ```
-  [
-    { "op": "replace", "path": "/Available", "value": false }
-  ]
-  ```
-  * "op" is the operation, "path" is the table column name, and "value" is the new value.
+
 * In your terminal run ```dotnet watch run``` in the project directory.
+* Using [Postman](https://www.postman.com/), use the following urls and/or raw JSON text:
+  * **GET** method url:
+  ```https://localhost:5001/api/animals```  
+  _For more specific GET queries, please view the [table](#query-parameters-for-a-get-request-on-animals)_.
+  * **POST** method raw JSON:
+  ```
+  {
+    "name": "string",
+    "type": "string",
+    "breed": "string",
+    "available": "bool",
+    "dateAdmitted": "yyyy-MM-dd"
+  }
+  ```
+  Path for POST: ```https://localhost:5001/api/v1/animals/```  
+
+  * **PUT** method raw JSON body:
+  ```
+  {
+    "animalId": "int",
+    "name": "string",
+    "type": "string",
+    "breed": "string",
+    "available": "bool",
+    "dateAdmitted": "yyyy-MM-dd"
+  }
+  ```  
+  _Make sure the path id matches the animalId in the JSON body_  
+  Route for PUT method: ```https://localhost:5001/api/v1/animals/{id}```
+    
+  * **PATCH** method, use the following sample JSON syntax in the body:
+    ```
+    [
+      { "op": "replace", "path": "/Available", "value": false }
+    ]
+    ```
+    * "op" is the operation, "path" is the table column name, and "value" is the new value.
+  * **DELETE** method path: ```https://localhost:5001/api/v1/animals/{id}```  
+
+### Use API with Swagger: 
 * In your browser open https://localhost:5001/swagger/index.html
 * Use the GUI to navigate the API
+
 
 ## Query Parameters for a GET Request on **Animals**: 
 
@@ -89,6 +124,7 @@ PATCH https://localhost:5001/api/v1.1/animals/{id}
 | Date | DateTime(YYYY-mm-DD)    | not required | Returns animals with a matching admittance date (note: must include Year, Month, and Day) | https://localhost:5001/api/animals?date={YYYY-mm-DD} |
 | Available | bool | not required | Returns list of animals that are available (true) or adopted (false) | https://localhost:5001/api/animals?available={true/false} |
 | Random | bool | not required | Returns a random animal, Default is False | https://localhost:5001/api/animals?random={TRUE} |
+
 
 
 ## Known Bugs
